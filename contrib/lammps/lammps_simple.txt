@@ -1,0 +1,29 @@
+#------------------------------- INITIALIZATION -------------------------------#
+
+units metal
+dimension 3
+boundary p p f
+atom_style full
+newton on off
+comm_modify vel yes
+
+#----------------------------------- Structure --------------------------------#
+
+read_data input_file_sign
+masses_sign
+neighbor 2.0 bin
+
+#-------------------------------- ATOM GROUPING -------------------------------#
+
+group_sign
+
+#---------------------------------- Potential ---------------------------------#
+
+potential_sign
+
+#------------------------------------- Run ------------------------------------#
+
+fix_sign
+
+quit
+
