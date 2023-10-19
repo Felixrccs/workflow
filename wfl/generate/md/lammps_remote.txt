@@ -1,0 +1,40 @@
+#------------------------------- INITIALIZATION -------------------------------#
+  
+units metal
+dimension 3
+boundary p p f
+atom_style full
+newton on
+atom_modify map yes
+timer timeout 23:00:00 every 1000
+
+#------------------------------- ATOM DEFINITION ------------------------------#
+
+read_data input_file_sign
+masses_sign 
+
+#-------------------------------- ATOM GROUPING -------------------------------#
+
+group_sign
+
+#--------------------------- BUCKINGHAM INTERACTIONS --------------------------#
+
+pair_style mace no_domain_decomposition
+pair_coeff * * mace_file_sign elements_sign
+reset_timestep 0
+
+#------------------------------------ DUMPS -----------------------------------#
+
+write_dump all custom initial_cell_sign id type x y z modify sort id
+timestep timestep_sign
+variable t world temperatures_sign
+velocity_sign
+dump all_xyz all xyz dump_steps_sign dump_name_sign.${t}.xyz
+dump_modify all_xyz element elements_sign
+
+fix_sign
+restart_sign
+thermostat_sign
+temper total_steps_sign exchange_steps_sign $t myfix seed_sign
+quit
+
