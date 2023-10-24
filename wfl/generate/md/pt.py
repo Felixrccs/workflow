@@ -6,6 +6,7 @@ from ase.data import atomic_masses, chemical_symbols
 from ase.io import read
 from ase.io.lammpsdata import write_lammps_data
 from ase.io.lammpsrun import read_lammps_dump
+from wfl.configset import ConfigSet, OutputSpec
 
 from subprocess import run
 #from wfl.configset import ConfigSet, OutputSpec
@@ -137,8 +138,9 @@ def replica_exchange(lammps_run_folder, lammps_src_maschine,
     with open(lammps_data_file, 'w') as f:
         write_lammps_data(f, atoms, atom_style='full')
 
-    print(os.path.dirname(os.path.realpath(__file__)))
-    with open('/u/friccius/scripts/lammps_scripts_mace/lammps_remote.txt', 'r') as f:
+    template = os.path.join(os.path.dirname(os.path.realpath(__file__)),'lammps_remote.txt')
+    print(template)
+    with open(template, 'r') as f:
         text_string = f.read()
 
     text_string = re.sub(r'initial_cell_sign', initial_dump, text_string)
