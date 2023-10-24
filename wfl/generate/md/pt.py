@@ -13,7 +13,7 @@ from subprocess import run
 
 
 
-def replica_exchange(lammps_run_folder, lammps_src_maschine,
+def replica_exchange(lammps_run_folder, run_id, lammps_src_maschine,
                      temperatures, mace_file, total_steps=1000, exchange_steps=250, timestep=0.001,
                      dump_steps=50, restart_steps = 10000, **kwargs):
     """parallel tempering and replica exchange using LAMMPS. Only requirement: LAMMPS mpi with
@@ -57,8 +57,8 @@ def replica_exchange(lammps_run_folder, lammps_src_maschine,
     None
     """
 
-    if not os.path.exists('RUN_01'):
-        os.mkdir('RUN_01')
+    if not os.path.exists(run_id):
+        os.mkdir(run_id)
 
 
     if not lammps_run_folder.endswith('/'):
@@ -70,7 +70,7 @@ def replica_exchange(lammps_run_folder, lammps_src_maschine,
             if file.endswith('.traj'):
                 input_structure_file = lammps_run_folder + file
         
-    lammps_run_folder += 'RUN_01/'
+    lammps_run_folder += f'{run_id}/'
 
     lammps_run_file = lammps_run_folder + 'lammps.temper'
     lammps_data_file = lammps_run_folder + 'lammps.data'
