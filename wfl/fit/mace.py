@@ -14,7 +14,7 @@ from pathlib import Path
 from shutil import copyfile
 
 
-def fit(fitting_configs, mace_name, mace_fit_params, mace_fit_cmd=None, ref_property_prefix="REF_",
+def fit(fitting_configs, mace_name, mace_fit_params, mace_fit_cmd=None,
         prev_checkpoint_file=None, valid_configs=None, test_configs=None, skip_if_present=True, run_dir=".",
         verbose=True, dry_run=False, remote_info=None, remote_label=None, wait_for_results=True):
     """
@@ -68,6 +68,8 @@ def fit(fitting_configs, mace_name, mace_fit_params, mace_fit_cmd=None, ref_prop
     run_dir = Path(run_dir)
 
     assert isinstance(mace_fit_params, dict)
+    mace_fit_params.name = mace_name
+
     if prev_checkpoint_file is not None:
         assert Path(prev_checkpoint_file).is_file(), "No previous checkpoint file found!"
 
@@ -88,10 +90,10 @@ def fit(fitting_configs, mace_name, mace_fit_params, mace_fit_cmd=None, ref_prop
         input_files = remote_info.input_files.copy()
         # run dir will contain only things created by fitting, so it's safe to copy the
         # entire thing back as output
-        output_files = remote_info.output_files + [str(run_dir)]
+        output_files = remote_info.output_files + [f'{mace_name}.model', f'{mace_name}_swa.model', 'logs']
 
         # convert to lists in memory so pickling for remote run will work
-        fitting_configs = ConfigSet(list(fitting_configs))
+        fitting_configs = ConfigSet(list(fitting_configs)) 
         if valid_configs is not None:
             valid_configs = ConfigSet(list(valid_configs))
         if test_configs is not None:
