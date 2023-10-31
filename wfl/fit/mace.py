@@ -68,7 +68,7 @@ def fit(fitting_configs, mace_name, mace_fit_params, mace_fit_cmd=None,
     run_dir = Path(run_dir)
 
     assert isinstance(mace_fit_params, dict)
-    mace_fit_params.name = mace_name
+    mace_fit_params['name'] = mace_name
 
     if prev_checkpoint_file is not None:
         assert Path(prev_checkpoint_file).is_file(), "No previous checkpoint file found!"
