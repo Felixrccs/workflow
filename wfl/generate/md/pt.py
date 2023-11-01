@@ -120,11 +120,11 @@ def replica_exchange(lammps_run_folder, run_id, lammps_src_maschine,
 
         fix_list.append('fix fixedlayers fixed_layer setforce 0. 0. 0.')
         fix_list.append(
-                'fix extra all print 10 """{"timestep": $(step), "pe":$(c_thermo_pe), "n_pe": $(c_custom_pe), "temp": $(c_moving_temp)}""" title "" file ' + dump_filename + '.${t}.json screen no')
+            'fix extra all print 10 """{"timestep": $(step), "pe":$(c_thermo_pe), "n_pe": $(c_custom_pe), "temp": $(c_moving_temp)}""" title "" file ' + dump_filename + '.${t}.json screen no')
 
     except:
         fix_list.append(
-            'fix extra all print 10 """{"timestep": $(step), "pe":$(c_thermo_pe), "temp": $(c_thermo_temp)}""" title "" file ' + dump_filename + '.${t}.json screen no')
+            'fix extra all print 10 """{"timestep": $(step), "pe":$(c_thermo_pe), "n_pe": $(c_custom_pe), "temp": $(c_thermo_temp)}""" title "" file ' + dump_filename + '.${t}.json screen no')
         fix_list.append('fix momentum all momentum 100 linear 1 1 1 angular')
         fix_atoms_parameter = False
 
