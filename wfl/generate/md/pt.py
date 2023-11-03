@@ -69,6 +69,11 @@ def replica_exchange(lammps_run_folder, run_id, lammps_src_maschine,
         for file in files:
             if file.endswith('.traj'):
                 input_structure_file = lammps_run_folder + file
+            elif file.endswith('.xyz'):
+                input_structure_file = lammps_run_folder + file
+            else:
+                print('no stucture_file found')
+                sys.exit()
         
     lammps_run_folder += f'{run_id}/'
 
