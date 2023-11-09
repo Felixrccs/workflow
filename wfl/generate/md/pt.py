@@ -187,9 +187,9 @@ def replica_exchange(lammps_run_folder, run_id, lammps_src_maschine,
             tmp_string += f'mass {i + 1} {atomic_masses[val]} \n'
     for i, val in enumerate(remaining_sorts):
         if val == 1:
-            tmp_string += f'mass {i + 1} {atomic_masses[val]*2} \n'
+            tmp_string += f'mass {i + 1 + len(atom_sorts)} {atomic_masses[val]*2} \n'
         else:
-            tmp_string += f'mass {i + 1} {atomic_masses[val]} \n'
+            tmp_string += f'mass {i + 1+ len(atom_sorts)} {atomic_masses[val]} \n'
     text_string = re.sub(r'masses_sign \n', tmp_string, text_string)
 
     tmp_string = ''
