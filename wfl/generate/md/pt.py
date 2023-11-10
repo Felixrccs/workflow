@@ -102,8 +102,6 @@ def replica_exchange(lammps_run_folder, run_id, lammps_src_maschine,
         for val in h_id:
             tmp_string += f' {val + 1}'
         group_list.append('group hydrogen id' + tmp_string)
-        fix_list.append('fix hzwall_lo hydrogen wall/harmonic zlo EDGE 2.0 0.0 4.5')
-    fix_list.append('fix hzwall_hi all wall/harmonic zhi EDGE 0.5 0.0 10.0')
     
 
 

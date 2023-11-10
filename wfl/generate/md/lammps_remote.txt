@@ -2,7 +2,7 @@
   
 units metal
 dimension 3
-boundary p p f
+boundary p p p
 atom_style full
 newton on
 atom_modify map yes
