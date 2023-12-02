@@ -206,8 +206,8 @@ def replica_exchange(lammps_run_folder, run_id, lammps_src_maschine,
     for val in temperatures:
         partition_string += f'1 '
    
-    print(f'srun -n {used_cores} {lammps_src_maschine} -partition {partition_string}-l {log_file} -sc {screen_file} -k on g 1 -sf kk -i {lammps_run_file} > {lammps_out_file}', flush=True)
-    run(f'srun -n {used_cores} {lammps_src_maschine} -partition {partition_string}-l {log_file} -sc {screen_file} -k on g 1 -sf kk -i {lammps_run_file} > {lammps_out_file}', shell=True)
+    print(f'srun -n {used_cores} {lammps_src_maschine} -partition {partition_string}-l {log_file} -sc {screen_file} -k on g 4 -sf kk -i {lammps_run_file} > {lammps_out_file}', flush=True)
+    run(f'srun -n {used_cores} {lammps_src_maschine} -partition {partition_string}-l {log_file} -sc {screen_file} -k on g 4  -sf kk -i {lammps_run_file} > {lammps_out_file}', shell=True)
 
 
     cell = read_lammps_dump(infileobj=initial_dump, order=False, index=-1).get_cell()
@@ -218,7 +218,7 @@ def replica_exchange(lammps_run_folder, run_id, lammps_src_maschine,
         for at in in_config:
             at.set_cell(cell)
             at.set_pbc(True)
-            at.info['config_type'] = 'parralell_tempering'
+            at.info['config_type'] = 'parallel_tempering'
             out_config.store(at)
         out_config.close()
         os.remove(dump_filename + f'_tmp.{temp}.xyz')
