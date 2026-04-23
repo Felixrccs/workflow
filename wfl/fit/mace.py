@@ -233,11 +233,11 @@ def _prep_configs_file(configs, use_params, key, workdir=Path()):
         fd_scratch, filename = tempfile.mkstemp(prefix=str(workdir / f"_MACE_{key}_configs."), suffix=".xyz", dir=".")
         os.close(fd_scratch)
 
-        if key in use_params.keys():
+        if key in use_params['heads']['default'].keys():
             warnings.warn(f"Ignoring configs file '{use_params[key]}' in mace_fit_params, "
                           f"instead using configs passed in and saved to '{filename}'.")
 
-        use_params[key] = filename
+        use_params['heads']['default'][key] = filename
         ase.io.write(filename, configs)
 
         return filename
