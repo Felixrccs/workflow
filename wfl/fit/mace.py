@@ -157,13 +157,13 @@ def fit(fitting_configs, mace_name, mace_fit_params, mace_fit_cmd=None, ref_prop
 
     for key, val in mace_fit_params.items():
         if isinstance(val, int) or isinstance(val, float):
-            mace_fit_cmd += f" --{key}={val}"
+            mace_fit_cmd += f' --{key}={val}'
         elif isinstance(val, str):
-            mace_fit_cmd += f" --{key}='{val}'"
+            mace_fit_cmd += f' --{key}="{val}"'
         elif val is None:
-            mace_fit_cmd += f" --{key}"
+            mace_fit_cmd += f' --{key}'
         else:
-            mace_fit_cmd += f" --{key}='{val}'"
+            mace_fit_cmd += f' --{key}="{val}"'
 
     if dry_run or verbose:
         print('fitting command:\n', mace_fit_cmd)
