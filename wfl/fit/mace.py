@@ -234,7 +234,7 @@ def _prep_configs_file(configs, use_params, key, workdir=Path()):
         os.close(fd_scratch)
 
         if key in use_params['heads']['default'].keys():
-            warnings.warn(f"Ignoring configs file '{use_params[key]}' in mace_fit_params, "
+            warnings.warn(f"Ignoring configs file '{use_params['heads']['default'][key]}' in mace_fit_params, "
                           f"instead using configs passed in and saved to '{filename}'.")
 
         use_params['heads']['default'][key] = filename
