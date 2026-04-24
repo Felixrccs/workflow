@@ -245,6 +245,6 @@ def _prep_configs_file(configs, use_params, key, workdir=Path()):
     else:
         # make sure this isn't a relative pathname, because the chdir that surrounds actually
         # running the fit will break it
-        use_params[key] = str(Path(configs_filename).absolute())
+        use_params['heads']['default'][key] = str(Path(configs_filename).absolute())
 
         return None
