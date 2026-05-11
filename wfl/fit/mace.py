@@ -95,7 +95,10 @@ def fit(fitting_configs, mace_name, mace_fit_params, mace_fit_cmd=None, ref_prop
         input_files = remote_info.input_files.copy()
         # run dir will contain only things created by fitting, so it's safe to copy the
         # entire thing back as output
-        output_files = remote_info.output_files + [str(run_dir)]
+        if len(remote_info.output_files) == 0:
+            output_files = [str(run_dir)]
+        else:
+            output_files = remote_info.output_files
 
         # convert to lists in memory so pickling for remote run will work
         fitting_configs = ConfigSet(list(fitting_configs))
